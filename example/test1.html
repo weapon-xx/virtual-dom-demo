@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript" src="../src/element.js"></script>
+    <script type="text/javascript">
+    var ul = el('ul', {id: 'list'}, [
+      el('li', {class: 'item'}, ['Item 1']),
+      el('li', {class: 'item'}, ['Item 2']),
+      el('li', {class: 'item'}, ['Item 3'])
+    ])
+
+    document.querySelector('body').appendChild(ul.render())
+    </script>
+  </body>
+</html>
