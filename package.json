@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/weapon-xx/virtual-dom-demo/issues"
   },
-  "homepage": "https://github.com/weapon-xx/virtual-dom-demo#readme"
+  "homepage": "https://github.com/weapon-xx/virtual-dom-demo#readme",
+  "devDependencies": {
+    "list-diff2": "^0.1.4"
+  }
 }

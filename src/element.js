@@ -5,6 +5,22 @@
     this.tagName = tagName
     this.props = props
     this.children = children
+
+    this.key = props ? props.key : void 0
+
+    // 统计子节点
+    let count = 0
+
+    this.children.forEach((child, index) => {
+      if(child instanceof Element) {
+        count += child.count
+      } else {
+        child = '' + child  // 文本节点转字符串
+      }
+      count++
+    })
+
+    this.count = count
   }
 
   Element.prototype.render = function() {
