@@ -1,6 +1,6 @@
 "use strict";
 
-(function(exports) {
+(function(global) {
   function Element(tagName, props, children) {
     this.tagName = tagName
     this.props = props
@@ -23,7 +23,7 @@
   }
 
 
-  exports.el = function(tagName, props, children) {
+  global.el = function(tagName, props, children) {
     return new Element(tagName, props, children)
   }
 
