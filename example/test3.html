@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>test3</title>
   </head>
   <body>
     <script type="text/javascript" src="../src/util.js"></script>
@@ -10,18 +10,5 @@
     <script type="text/javascript" src="../src/element.js"></script>
     <script type="text/javascript" src="../src/patch.js"></script>
     <script type="text/javascript" src="../src/diff.js"></script>
-    <script type="text/javascript">
-      var ul1 = el('ul', {id: 'list'}, [
-        el('li', {class: 'item'}, ['Item 1']),
-      ])
-
-      var ul2 = el('ul', {id: 'list2'}, [
-        el('li', {class: 'item2'}, ['Item 2']),
-        el('li', {class: 'item3'}, ['Item 3']),
-      ])
-
-      diff(ul1, ul2)
-
-    </script>
   </body>
 </html>

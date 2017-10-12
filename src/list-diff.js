@@ -8,7 +8,7 @@
    *                  - moves is a list of actions that telling how to remove and insert
    */
   function diff (oldList, newList, key) {
-    var oldMap = makeKeyIndexAndFree(oldList, key)  
+    var oldMap = makeKeyIndexAndFree(oldList, key)    // {keyIndex: {}, free: []}
     var newMap = makeKeyIndexAndFree(newList, key)
 
     var newFree = newMap.free
@@ -18,21 +18,23 @@
 
     var moves = []
 
-    // a simulate list to manipulate
+    // a simulate list to manipulate  用于操作的模拟列表
     var children = []
     var i = 0
     var item
     var itemKey
-    var freeIndex = 0
+    var freeIndex = 0     // newMap.free 指针
 
-    // fist pass to check item in old list: if it's removed or not
+    // fist pass to check item in old list: if it's removed or not  检查当前 item 是否被删除
     while (i < oldList.length) {
       item = oldList[i]
-      itemKey = getItemKey(item, key)
+      itemKey = getItemKey(item, key)   // 获取 key 属性
       if (itemKey) {
         if (!newKeyIndex.hasOwnProperty(itemKey)) {
+          // 如果新列表中不存在s
           children.push(null)
         } else {
+          // 如果存在，首先根据 key 找到新列表中节点的 index，然后 push 到数组中
           var newItemIndex = newKeyIndex[itemKey]
           children.push(newList[newItemIndex])
         }
@@ -43,9 +45,9 @@
       i++
     }
 
-    var simulateList = children.slice(0)
+    var simulateList = children.slice(0)    // 数组转换？
 
-    // remove items no longer exist
+    // remove items no longer exist   删除不存在的节点
     i = 0
     while (i < simulateList.length) {
       if (simulateList[i] === null) {
@@ -56,38 +58,40 @@
       }
     }
 
-    // i is cursor pointing to a item in new list
-    // j is cursor pointing to a item in simulateList
+    // i is cursor pointing to a item in new list       新列表指针
+    // j is cursor pointing to a item in simulateList   模拟列表指针
     var j = i = 0
     while (i < newList.length) {
       item = newList[i]
-      itemKey = getItemKey(item, key)
+      itemKey = getItemKey(item, key)     // 新列表 item 的 key
 
       var simulateItem = simulateList[j]
-      var simulateItemKey = getItemKey(simulateItem, key)
-
+      var simulateItemKey = getItemKey(simulateItem, key)   // 模拟列表 item 的 key
       if (simulateItem) {
+        // 假如 key 相同
         if (itemKey === simulateItemKey) {
           j++
         } else {
-          // new item, just inesrt it
+          // new item, just inesrt it 新节点就插入到 moves
           if (!oldKeyIndex.hasOwnProperty(itemKey)) {
             insert(i, item)
           } else {
             // if remove current simulateItem make item in right place
             // then just remove it
-            var nextItemKey = getItemKey(simulateList[j + 1], key)
+            var nextItemKey = getItemKey(simulateList[j + 1], key)    // 找出下个节点的 key
+            // 假如 key 相等
             if (nextItemKey === itemKey) {
               remove(i)
-              removeSimulate(j)
+              removeSimulate(j)   // 删除模拟列表的 j 节点
               j++ // after removing, current j is right, just jump to next one
             } else {
-              // else insert item
+              // else insert item // key 不相等则插入到 moves
               insert(i, item)
             }
           }
         }
       } else {
+        // 如果 simulateItem 不存在，则是新增节点直接插入到 moves 中
         insert(i, item)
       }
 
@@ -95,12 +99,12 @@
     }
 
     function remove (index) {
-      var move = {index: index, type: 0}
+      var move = {index: index, type: 0}                // 删除类型
       moves.push(move)
     }
 
     function insert (index, item) {
-      var move = {index: index, item: item, type: 1}
+      var move = {index: index, item: item, type: 1}    // 插入/新增类型
       moves.push(move)
     }
 
@@ -122,13 +126,14 @@
   function makeKeyIndexAndFree (list, key) {
     var keyIndex = {}
     var free = []
+    // 遍历列表
     for (var i = 0, len = list.length; i < len; i++) {
       var item = list[i]
       var itemKey = getItemKey(item, key)   // 获取 item 中的 key
       if (itemKey) {
-        keyIndex[itemKey] = i
+        keyIndex[itemKey] = i    // key 和 index 对应起来，存在 keyIndex 对象
       } else {
-        free.push(item)
+        free.push(item)          // 如果 key 不存在的话，push 到 free 数组
       }
     }
     return {
