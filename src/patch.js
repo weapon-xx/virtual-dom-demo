@@ -34,7 +34,7 @@
       switch(patch.type) {
         case 0:
           // 替换
-          const newNode = typeof patch.node === 'string' ? document.createTextNode(patch.node) : patch.node.render()
+          const newNode = typeof patch.node === 'object' ? patch.node.render() : document.createTextNode(patch.node)
           node.parentNode.replaceChild(newNode, node)
           break
         case 1:
