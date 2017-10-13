@@ -9,20 +9,20 @@
   }
 
   function dfsWalk(oldNode, newNode, index, patches) {
-    let currentPatch = []   // 每两个对应节点相互比较，所有差异都放在差异数组中
+    let currentPatch = []   // 每两个对应节点相互比较，所有差异都放在补丁数组中
 
     if(newNode === null) {
       // 假如新节点不存在则不需要做任何事情
     } else if(_.isString(oldNode) && _.isString(newNode)) {
       // 节点文本类型
       if(newNode !== oldNode) {
-        currentPatch.push({ type: patch.TEXT, content: newNode })   // 直接使用新节点文本  3
+        currentPatch.push({ type: patchType.TEXT, content: newNode })   // 直接使用新节点文本  3
       }
     } else if( oldNode.tagName === newNode.tagName && oldNode.key === newNode.key) {
       // diff props
       let propsPatches = diffProps(oldNode, newNode)      // 属性差异 2
       if(propsPatches) {
-        currentPatch.push({ type: patch.PROPS, props: propsPatches })
+        currentPatch.push({ type: patchType.PROPS, props: propsPatches })
       }
       // 假如有 ignore 属性则不会进行 diff children
       if(!(newNode.props && newNode.props.hasOwnProperty('ignore'))) {
@@ -30,11 +30,11 @@
       }
     } else {
       // 节点不一样，用新节点直接替换
-      currentPatch.push({ type: patch.REPLACE, node: newNode })   // 替换类型 0
+      currentPatch.push({ type: patchType.REPLACE, node: newNode })   // 替换类型 0
     }
 
     if(currentPatch.length) {
-      patches[index] = currentPatch     // 以下标值（index）作为每个节点差异对象的 key 存入 patches 对象
+      patches[index] = currentPatch     // 以下标值（index）作为每个节点补丁数组的 key 存入 patches 对象
     }
   }
 
@@ -43,7 +43,7 @@
     newChildren = diffs.children
 
     if(diffs.moves.length) {
-      currentPatch.push({ type: patch.REORDER, moves: diffs.moves })  // 1 移动/新增类型
+      currentPatch.push({ type: patchType.REORDER, moves: diffs.moves })  // 1 移动/新增类型
     }
 
     let leftNode = null

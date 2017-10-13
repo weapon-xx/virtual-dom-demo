@@ -13,11 +13,11 @@
     <script type="text/javascript">
       var ul1 = el('ul', {id: 'list'}, [
         el('li', {class: 'item'}, ['Item 1']),
+        el('li', {class: 'item2'}, ['Item 2']),
       ])
 
       var ul2 = el('ul', {id: 'list2'}, [
-        el('li', {class: 'item2'}, ['Item 2']),
-        el('li', {class: 'item3'}, ['Item 3']),
+        el('li', {class: 'item1'}, ['Item 1'])
       ])
 
       diff(ul1, ul2)
