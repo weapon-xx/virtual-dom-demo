@@ -38,6 +38,7 @@
     return el
   }
 
+  global.Element = Element
 
   global.el = function(tagName, props, children) {
     return new Element(tagName, props, children)

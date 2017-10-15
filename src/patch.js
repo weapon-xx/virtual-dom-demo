@@ -34,7 +34,7 @@
       switch(patch.type) {
         case 0:
           // 替换
-          const newNode = typeof patch.node === 'object' ? patch.node.render() : document.createTextNode(patch.node)
+          const newNode = patch.node instanceof Element ? patch.node.render() : document.createTextNode(patch.node)
           node.parentNode.replaceChild(newNode, node)
           break
         case 1:
@@ -82,7 +82,7 @@
         staticNodeList.splice(index, 1)                  // 移除 index 节点
       } else if(move.type === 1) {
         // 插入
-        const insertNode =  maps[move.item.key] ? maps[move.item.key].cloneNode(true) : (typeof move.item === 'object' ? move.item.render() : document.createTextNode(move.item))
+        const insertNode =  maps[move.item.key] ? maps[move.item.key].cloneNode(true) : (move.item instanceof Element ? move.item.render() : document.createTextNode(move.item))
         node.insertBefore(insertNode, node.childNodes[index] || null)
         staticNodeList.splice(index, 0, insertNode)         // 插入 index 节点
       }
