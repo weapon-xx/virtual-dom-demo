@@ -12,17 +12,19 @@
     <script type="text/javascript" src="../src/diff.js"></script>
     <script type="text/javascript">
       const ul1 = el('ul', {id: 'list'}, [
-        el('li', {class: 'item'}, ['Item 1']),
-        el('li', {class: 'item2'}, ['Item 2']),
-      ]),
-      ul1Node = ul1.render()
+        el('li', {class: 'item',  key: 'item1'}, ['Item 1']),
+        el('li', {class: 'item2', key: 'item2'}, ['Item 2']),
+        el('li', {class: 'item3', key: 'item3'}, ['Item 3'])
+      ]);
+      const ul1Node = ul1.render()
 
       document.querySelector('body').appendChild(ul1Node)
 
       const ul2 = el('ul', {id: 'list2'}, [
-        el('li', {class: 'item1'}, ['Item 1']),
-        el('div', {class: 'div'}, ['div']),
-        el('li', {class: 'item2'}, ['Item 2'])
+        el('li', {class: 'item2', key: 'item2'}, ['Item 2']),
+        el('li', {class: 'item1', key: 'item1'}, ['Item 1']),
+        el('li', {class: 'item3', key: 'item4'}, ['Item 4']),
+        el('li', {class: 'item3', key: 'item3'}, ['Item 3']),
       ])
 
       const patches = diff(ul1, ul2)

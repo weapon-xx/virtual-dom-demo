@@ -2,7 +2,7 @@
 
 (function(global) {
   function diff(oldTree, newTree) {
-    let index = 0       // 节点下标
+    let index = 0       // 根节点下标
     let patches = {}    // 所有差异都存在这个对象下
     dfsWalk(oldTree, newTree, index, patches)
     return patches
@@ -57,10 +57,8 @@
 
       dfsWalk(child, newChild, currentNodeIndex, patches)   // 递归子节点
 
-      leftNode = child    // 将当前节点赋值给 leftNode
+      leftNode = child    // 赋值 leftNode
     })
-
-
   }
 
   function diffProps(oldNode, newNode) {

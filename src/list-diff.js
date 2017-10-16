@@ -31,7 +31,7 @@
       itemKey = getItemKey(item, key)   // 获取 key 属性
       if (itemKey) {
         if (!newKeyIndex.hasOwnProperty(itemKey)) {
-          // 如果新列表中不存在s
+          // 如果新列表中不存在，则插入 null 到数组
           children.push(null)
         } else {
           // 如果存在，首先根据 key 找到新列表中节点的 index，然后 push 到数组中
@@ -45,7 +45,7 @@
       i++
     }
 
-    var simulateList = children.slice(0)    // 数组转换？
+    var simulateList = children.slice(0)    // 数组转换
 
     // remove items no longer exist   删除不存在的节点
     i = 0
@@ -76,17 +76,21 @@
           if (!oldKeyIndex.hasOwnProperty(itemKey)) {
             insert(i, item)
           } else {
-            // if remove current simulateItem make item in right place
-            // then just remove it
-            var nextItemKey = getItemKey(simulateList[j + 1], key)    // 找出下个节点的 key
-            // 假如 key 相等
-            if (nextItemKey === itemKey) {
-              remove(i)
-              removeSimulate(j)   // 删除模拟列表的 j 节点
-              j++ // after removing, current j is right, just jump to next one
-            } else {
-              // else insert item // key 不相等则插入到 moves
+            // new item, just inesrt it
+            if (!oldKeyIndex.hasOwnProperty(itemKey)) {
               insert(i, item)
+            } else {
+              // if remove current simulateItem make item in right place
+              // then just remove it
+              var nextItemKey = getItemKey(simulateList[j + 1], key)
+              if (nextItemKey === itemKey) {
+                remove(i)
+                removeSimulate(j)
+                j++ // after removing, current j is right, just jump to next one
+              } else {
+                // else insert item
+                insert(i, item)
+              }
             }
           }
         }

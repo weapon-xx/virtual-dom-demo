@@ -66,7 +66,7 @@
       if(node.nodeType === 1) {
         const key = node.getAttribute('key')
         if(key) {
-          map[key] = node
+          maps[key] = node
         }
       }
     })
@@ -90,8 +90,14 @@
 
   }
 
-  function setProps() {
-
+  function setProps(node, props) {
+    for(let key in props) {
+      if(node.getAttribute(key) === void 666) {
+        node.setAttribute(key, props[key])
+      } else {
+        _.setAttr(node, key, props[key])
+      }
+    }
   }
 
   global.patch = patch
