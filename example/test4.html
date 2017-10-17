@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <body>
+      <button id="btn" type="button" name="button">repaint</button>
+
+      <script type="text/javascript" src="../src/util.js"></script>
+      <script type="text/javascript" src="../src/list-diff.js"></script>
+      <script type="text/javascript" src="../src/element.js"></script>
+      <script type="text/javascript" src="../src/patch.js"></script>
+      <script type="text/javascript" src="../src/diff.js"></script>
+      <script type="text/javascript">
+        const $body = document.querySelector('body')
+        let i = 0
+        let children = []
+
+        while(i < 10000) {
+          children.push(el('li', {key: i}, [i + '']))
+          i++
+        }
+        const ul1 = el('ul', {class: 'ul'}, children)
+        const oldNode = ul1.render()
+        $body.appendChild(oldNode)
+
+        document.querySelector('#btn').addEventListener('click', e => {
+          let i = 0
+          let newChildren = []
+
+          while(i < 10000) {
+            if(i % 10 === 0) {
+              newChildren.push(el('li', {key: i}, [i + '-change']))
+            } else {
+              newChildren.push(el('li', {key: i}, [i + '']))
+            }
+            i++
+          }
+
+          const ul2 = el('ul', {class: 'ul'}, newChildren)
+          patch(oldNode, diff(ul1, ul2))
+        })
+
+      </script>
+  </body>
+</html>

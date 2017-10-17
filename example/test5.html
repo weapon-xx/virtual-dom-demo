@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <button id="btn" type="button" name="button">repaint</button>
+    <ul id="ul">
+
+    </ul>
+    <script type="text/javascript">
+      const $body = document.querySelector('body')
+      const $ul = document.querySelector('#ul')
+      let i = 0
+
+      while(i < 10000) {
+        let $li = document.createElement('li')
+        let $text = document.createTextNode(i + '')
+        $li.appendChild($text)
+        $ul.appendChild($li)
+        i++
+      }
+
+      $body.appendChild($ul)
+
+      document.querySelector('#btn').addEventListener('click', e => {
+        const $newUl = document.createElement('ul')
+        let i = 0
+        while(i < 10000) {
+          let $li = document.createElement('li')
+          let $text
+          if(i % 10 === 0) {
+            $text = document.createTextNode(i + '-change')
+          } else {
+            $text = document.createTextNode(i)
+          }
+          $li.appendChild($text)
+          $newUl.appendChild($li)
+          i++
+        }
+        linear-gradient(to bottom, #000 0%, #1a2028 50%, #293845 100%)
+        $body.replaceChild($newUl, $ul)
+      })
+    </script>
+  </body>
+</html>

@@ -23,15 +23,13 @@
       const ul2 = el('ul', {id: 'list2'}, [
         el('li', {class: 'item2', key: 'item2'}, ['Item 2']),
         el('li', {class: 'item1', key: 'item1'}, ['Item 1']),
-        el('li', {class: 'item3', key: 'item4'}, ['Item 4']),
-        el('li', {class: 'item3', key: 'item3'}, ['Item 3']),
+        el('li', {class: 'item5', key: 'item5'}, ['Item 5']),
+        el('li', {class: 'item4', key: 'item4'}, ['Item 4']),
       ])
 
       const patches = diff(ul1, ul2)
 
       patch(ul1Node, patches)
-
-
     </script>
   </body>
 </html>
