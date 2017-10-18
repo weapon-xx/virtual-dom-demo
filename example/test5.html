@@ -16,8 +16,10 @@
 
       while(i < 10000) {
         let $li = document.createElement('li')
+        let $p = document.createElement('p')
         let $text = document.createTextNode(i + '')
-        $li.appendChild($text)
+        $p.appendChild($text)
+        $li.appendChild($p)
         $ul.appendChild($li)
         i++
       }
@@ -29,17 +31,19 @@
         let i = 0
         while(i < 10000) {
           let $li = document.createElement('li')
+          let $p = document.createElement('p')
           let $text
           if(i % 10 === 0) {
             $text = document.createTextNode(i + '-change')
           } else {
             $text = document.createTextNode(i)
           }
-          $li.appendChild($text)
+          $p.appendChild($text)
+          $li.appendChild($p)
           $newUl.appendChild($li)
           i++
         }
-        linear-gradient(to bottom, #000 0%, #1a2028 50%, #293845 100%)
+
         $body.replaceChild($newUl, $ul)
       })
     </script>

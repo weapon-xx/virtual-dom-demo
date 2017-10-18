@@ -18,7 +18,7 @@
         let i = 0
         let children = []
 
-        while(i < 10000) {
+        while(i < 1000) {
           children.push(el('li', {key: i}, [i + '']))
           i++
         }
@@ -30,7 +30,7 @@
           let i = 0
           let newChildren = []
 
-          while(i < 10000) {
+          while(i < 1000) {
             if(i % 10 === 0) {
               newChildren.push(el('li', {key: i}, [i + '-change']))
             } else {

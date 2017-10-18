@@ -18,7 +18,7 @@
 
     var moves = []
 
-    // a simulate list to manipulate  用于操作的模拟列表
+    // a simulate list to manipulate
     var children = []
     var i = 0
     var item
