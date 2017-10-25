@@ -16,7 +16,7 @@
     var oldKeyIndex = oldMap.keyIndex
     var newKeyIndex = newMap.keyIndex
 
-    var moves = []
+    var moves = []  // 需要注意 moves 和 children 对象
 
     // a simulate list to manipulate
     var children = []
@@ -45,14 +45,14 @@
       i++
     }
 
-    var simulateList = children.slice(0)    // 数组转换
+    var simulateList = children.slice(0)
 
     // remove items no longer exist   删除不存在的节点
     i = 0
     while (i < simulateList.length) {
       if (simulateList[i] === null) {
-        remove(i)
-        removeSimulate(i)
+        remove(i)           // 针对于真实 dom 节点
+        removeSimulate(i)   // 针对于 simulateList 数组
       } else {
         i++
       }
@@ -72,25 +72,20 @@
         if (itemKey === simulateItemKey) {
           j++
         } else {
-          // new item, just inesrt it 新节点就插入到 moves
+          // new item, just inesrt it
           if (!oldKeyIndex.hasOwnProperty(itemKey)) {
             insert(i, item)
           } else {
-            // new item, just inesrt it
-            if (!oldKeyIndex.hasOwnProperty(itemKey)) {
-              insert(i, item)
+            // if remove current simulateItem make item in right place
+            // then just remove it
+            var nextItemKey = getItemKey(simulateList[j + 1], key)
+            if (nextItemKey === itemKey) {
+              remove(i)           // 针对于真实 dom 节点
+              removeSimulate(j)   // 针对于 simulateList 数组
+              j++ // after removing, current j is right, just jump to next one
             } else {
-              // if remove current simulateItem make item in right place
-              // then just remove it
-              var nextItemKey = getItemKey(simulateList[j + 1], key)
-              if (nextItemKey === itemKey) {
-                remove(i)
-                removeSimulate(j)
-                j++ // after removing, current j is right, just jump to next one
-              } else {
-                // else insert item
-                insert(i, item)
-              }
+              // else insert item
+              insert(i, item)
             }
           }
         }

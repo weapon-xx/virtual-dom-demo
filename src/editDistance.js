@@ -54,4 +54,15 @@ function editInstance(a, b) {
 }
 
 
+{
+  keyIndex: {
+  item2: 0,
+  item1: 1,
+  item5: 2,
+  item4: 3
+  },
+  free: []
+}
+
+
 // console.log(editInstance('abdf', 'abc'))
