@@ -1,6 +1,10 @@
 "use strict";
 
 (function(global) {
+  const ul1 = new Element('ul', {class: 'ul'}, 'old list')
+  const ul2 = new Element('ul', {class: 'ul'}, 'new list')
+  diff(ul1, ul2)
+
   function diff(oldTree, newTree) {
     let index = 0       // 根节点下标
     let patches = {}    // 所有差异都存在这个对象下
