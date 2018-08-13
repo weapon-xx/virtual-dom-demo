@@ -26,7 +26,7 @@
     var freeIndex = 0     // newMap.free 指针
 
     // fist pass to check item in old list: if it's removed or not  检查当前 item 是否被删除
-    while (i < oldList.length) { 1
+    while (i < oldList.length) {
       item = oldList[i]
       itemKey = getItemKey(item, key)   // 获取 key 属性
       if (itemKey) {
