@@ -61,9 +61,9 @@
     // i is cursor pointing to a item in new list       新列表指针
     // j is cursor pointing to a item in simulateList   模拟列表指针
     var j = i = 0
-    while (i < newList.length) {2 1
-      item = newList[i]  5
-      itemKey = getItemKey(item, key)item5     // 新列表 item 的 key
+    while (i < newList.length) {
+      item = newList[i]
+      itemKey = getItemKey(item, key)     // 新列表 item 的 key
 
       var simulateItem = simulateList[j]
       var simulateItemKey = getItemKey(simulateItem, key)   // 模拟列表 item 的 key
@@ -78,11 +78,11 @@
           } else {
             // if remove current simulateItem make item in right place
             // then just remove it
-            var nextItemKey = getItemKey(simulateList[j + 1], key)item2
+            var nextItemKey = getItemKey(simulateList[j + 1], key)
             if (nextItemKey === itemKey) {
               remove(i)           // 针对于真实 dom 节点
               removeSimulate(j)   // 针对于 simulateList 数组
-              j++   1 // after removing, current j is right, just jump to next one
+              j++    // after removing, current j is right, just jump to next one
             } else {
               // else insert item
               insert(i, item)
