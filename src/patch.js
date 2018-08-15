@@ -82,9 +82,11 @@
         staticNodeList.splice(index, 1)                  // 移除 index 节点
       } else if(move.type === 1) {
         // 插入
-        const insertNode =  maps[move.item.key] ? maps[move.item.key].cloneNode(true) : (move.item instanceof Element ? move.item.render() : document.createTextNode(move.item))
-        node.insertBefore(insertNode, node.childNodes[index] || null) // 插入到页面的 dom-tree
+        const insertNode =  maps[move.item.key]
+         ? maps[move.item.key]
+         : (move.item instanceof Element ? move.item.render() : document.createTextNode(move.item))
         staticNodeList.splice(index, 0, insertNode)         // 数组中也要插入 index 节点
+        node.insertBefore(insertNode, node.childNodes[index] || null) // 插入到页面的 dom-tree
       }
     })
 
